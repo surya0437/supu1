@@ -1,0 +1,450 @@
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF1F2;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text y="15" font-size="15">💖</text></svg>') 10 10, auto;
+            background: linear-gradient(45deg, #fff1f2, #ffe4e6, #fce7f3);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: background 2s ease
+        }
+
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Glass effect for your containers */
+        .bg-white {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* The 'Happy' State */
+        body.celebrating {
+            background: linear-gradient(45deg, #fdf2f8, #fbcfe8, #fda4af);
+        }
+
+        .reveal-text {
+            background: linear-gradient(to right, #9f1239 50%, #f472b6 50%);
+            background-size: 200% 100%;
+            background-position: 100% 0;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: background-position 1.5s ease-out;
+        }
+
+        .reveal-text.active {
+            background-position: 0 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Particle Trail */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 9999;
+            animation: particle-fade 1s ease-out forwards;
+        }
+
+        @keyframes particle-fade {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(0, -50px) scale(0.5);
+            }
+        }
+
+        /* Floating Hearts Animation */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            animation: float-up 15s infinite ease-in;
+            opacity: 0.15;
+            font-size: 20px;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.15;
+            }
+
+            90% {
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #F472B6;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: #F472B6;
+            }
+        }
+
+        /* Polaroid Photos */
+        .polaroid {
+            background: white;
+            padding: 15px;
+            padding-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transform: rotate(0deg);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .polaroid::after {
+            content: attr(data-caption);
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 14px;
+            color: #4C0519;
+        }
+
+        .polaroid:nth-child(1) {
+            transform: rotate(-3deg);
+        }
+
+        .polaroid:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:nth-child(3) {
+            transform: rotate(-2deg);
+        }
+
+        /* Shimmer Effect */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Heartbeat Animation */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            10%,
+            30% {
+                transform: scale(1.1);
+            }
+
+            20%,
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Secret Message Reveal */
+        .secret-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            max-width: 500px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .secret-message.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Envelope Styles */
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #F9A8D4 0%, #F472B6 100%);
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(244, 114, 182, 0.3);
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 80px rgba(244, 114, 182, 0.4);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #EC4899;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+        }
+
+        .envelope.opening .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .wax-seal {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        /* Card Reveal Animation */
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Love Letter Paper Effect */
+        .love-letter {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(76, 5, 25, 0.1);
+            border-left: 4px solid #F472B6;
+            position: relative;
+        }
+
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #F472B6, #FBBF24, #F472B6);
+        }
+
+        /* Runaway Button Animation */
+        .runaway-button {
+            transition: all 0.3s ease;
+        }
+
+        /* Music Toggle Button */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F472B6, #EC4899);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(244, 114, 182, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(244, 114, 182, 0.6);
+        }
+
+        /* Section Fade */
+        .section-fade {
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        .section-fade.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Celebration Section */
+        .celebration {
+            display: none;
+        }
+
+        .celebration.active {
+            display: flex;
+        }
+
+        /* Valentine Week Card Styles */
+        .week-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .week-card:hover::before {
+            left: 100%;
+        }
+
+        .week-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(244, 114, 182, 0.3);
+        }
+
+        /* Rose Petals Animation */
+        .rose-petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fb7185;
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.7;
+            animation: fall 8s infinite ease-in;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }

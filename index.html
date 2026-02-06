@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question 💕</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="files/fav.png" type="image/x-icon">
+
+        <link rel="stylesheet" href="style.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="text-rose-900">
+
+    <!-- Overlay for secret message -->
+    <div class="overlay" id="overlay"></div>
+    <div class="fixed top-0 left-0 h-1.5 bg-gradient-to-r from-pink-300 via-rose-500 to-pink-300 z-[10001] transition-all duration-300"
+        id="scrollProgress" style="width: 0%"></div>
+    <!-- Secret Easter Egg Message -->
+    <div class="secret-message text-center p-8 bg-white/90 backdrop-blur-md rounded-3xl border-2 border-pink-100 shadow-2xl" id="secretMessage">
+            <div class="text-6xl mb-6 animate-bounce">🔒</div>
+            <h3 class="text-2xl font-bold text-rose-900 mb-4 tracking-wide">A Private Note for Your Eyes Only</h3>
+
+            <div class="space-y-4">
+                <p class="text-rose-700 italic">
+                    "I wanted to hide a little piece of my heart here, where only you would find it."
+                </p>
+
+                <div class="h-px w-16 bg-pink-200 mx-auto my-4"></div>
+
+                <p class="text-rose-800 text-lg leading-relaxed">
+                    Beyond the grand gestures and the shared moments, there is a quiet truth I carry every day:
+                    <span class="block mt-2 font-bold text-pink-600 text-2xl">
+                        You are my favorite thought.
+                    </span>
+                </p>
+
+                <p class="text-rose-700 text-sm">
+                    No matter where I am or what I'm doing, there's a part of my heart that is always,
+                    quietly, reaching out for yours.
+                </p>
+            </div>
+
+            <button id="closeSecret"
+                class="mt-8 bg-gradient-to-r from-rose-400 to-pink-400 text-white px-10 py-3 rounded-full font-semibold hover:shadow-pink-200 hover:shadow-lg transform transition-all active:scale-95">
+                Keep our secret ❤️
+            </button>
+        </div>
+
+    <!-- Floating Hearts Background -->
+    <div class="heart-container" id="heartsContainer"></div>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">
+        🎵
+    </button>
+    <audio id="backgroundMusic" loop>
+        <!-- <source src="files/m.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- Section 0: The Apology -->
+    <section id="section0" class="section-fade min-h-screen flex items-center justify-center px-4 py-20">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="text-center mb-8">
+                <div class="text-7xl mb-6 heartbeat">
+                    ✨
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-rose-900 mb-6">
+                    <span class="typewriter" id="apologyTitle">Wait for it...</span>
+                </h1>
+            </div>
+
+            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-2xl border-l-4 border-pink-400 shimmer">
+                <p class="text-lg md:text-2xl text-rose-800 leading-relaxed mb-6 text-center">
+                    I haven't forgotten for a single second. I've just been busy making sure this is as <span
+                        class="text-pink-500 font-bold">perfect</span> as you are.
+                </p>
+
+                <p class="text-lg md:text-xl text-rose-700 leading-relaxed mb-6 text-center">
+                    You deserve more than just a quick question or a rushed moment. You deserve a memory that feels like
+                    magic—crafted with every bit of love I have.
+                </p>
+
+                <p class="text-lg md:text-xl text-rose-700 leading-relaxed mb-6 text-center">
+                    The best things in life are worth the wait, and trust me... <span
+                        class="font-bold text-pink-500">you are the very best thing.</span>
+                </p>
+
+                <div class="bg-pink-50 p-6 rounded-lg mb-8 border border-pink-200">
+                    <p class="text-base md:text-lg text-rose-800 italic text-center">
+                        "Good things take time, but the most beautiful things take a little extra heart. I've been
+                        saving this just for you."
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-rose-600 mb-4 text-sm font-medium">
+                        Are you ready to see what I've been working on?
+                    </p>
+                    <button id="acceptApologyBtn"
+                        class="bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-500 hover:to-rose-500 text-white font-bold text-xl px-16 py-5 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse">
+                        Show Me! ✨
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-rose-500 text-sm italic">
+                    Every second was spent thinking of you...
+                </p>
+                <p class="text-rose-300 text-xs mt-2 cursor-pointer hover:text-rose-500 transition-all" id="easterEgg">
+                    (Your patience is about to pay off 🤫)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: The Sealed Envelope -->
+    <section id="section1" class="section-fade min-h-screen flex items-center justify-center px-4"
+        style="display: none;">
+        <div class="text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold text-rose-900 mb-6 animate-pulse">
+                You Have Mail 💌
+            </h2>
+            <p class="text-lg md:text-xl text-rose-700 mb-12 max-w-md mx-auto">
+                A message sealed with love awaits you...
+            </p>
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="wax-seal">❤️</div>
+            </div>
+            <p class="text-rose-600 mt-8 text-sm animate-bounce">Click to open</p>
+        </div>
+    </section>
+
+    <!-- Section 2: My Respect & Admiration -->
+    <section id="section2" class="section-fade min-h-screen flex items-center justify-center px-4 py-20"
+        style="display: none;">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-rose-900 mb-16">
+                Why You're Extraordinary
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400">
+                    <div class="text-5xl mb-4 text-center">💪</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Strength</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        I respect the way you handle the world with such grace. Your resilience inspires me every day.
+                    </p>
+                </div>
+
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400"
+                    style="transition-delay: 0.1s;">
+                    <div class="text-5xl mb-4 text-center">💖</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Heart</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        The kindness you show others is a constant inspiration to me. Your compassion knows no bounds.
+                    </p>
+                </div>
+
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400"
+                    style="transition-delay: 0.2s;">
+                    <div class="text-5xl mb-4 text-center">✨</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Mind</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        I admire your thoughts, your dreams, and the way you see the world. Your perspective is a gift.
+                    </p>
+                </div>
+
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400"
+                    style="transition-delay: 0.3s;">
+                    <div class="text-5xl mb-4 text-center">🌙</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Presence</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        Just being near you makes everything feel better. You have a way of making the world feel calm
+                        and bright.
+                    </p>
+                </div>
+
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400"
+                    style="transition-delay: 0.4s;">
+                    <div class="text-5xl mb-4 text-center">🌻</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Growth</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        Watching you chase your goals and become the person you want to be is one of my favorite things
+                        in life.
+                    </p>
+                </div>
+
+                <div class="reveal-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-pink-400"
+                    style="transition-delay: 0.5s;">
+                    <div class="text-5xl mb-4 text-center">🔒</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-4 text-center">Your Loyalty</h3>
+                    <p class="text-rose-700 text-center leading-relaxed">
+                        The way you stand by the people you love is incredible. Knowing I have you in my corner means
+                        everything.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button id="continueBtn1"
+                    class="bg-pink-400 hover:bg-pink-500 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+                    And most of all... 💕
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2.5: Our Memories (Polaroid Section) -->
+<section id="section2-5"
+    class="section-fade min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-rose-50 to-pink-50"
+    style="display: none;">
+    <div class="max-w-6xl mx-auto relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold text-center text-rose-900 mb-6">
+            Moments I Treasure
+        </h2>
+        <p class="text-center text-rose-600 mb-16 text-lg">
+            Every memory with you is a polaroid in my heart
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+            <!-- Polaroid 1 -->
+            <div class="flex justify-center">
+                <div class="polaroid" data-caption="Your smile ✨">
+                    <div class="w-64 h-64 overflow-hidden">
+                        <img src="files/1.jpg" alt="Your smile" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polaroid 2 -->
+            <div class="flex justify-center">
+                <div class="polaroid" data-caption="Your laughs 🎭">
+                    <div class="w-64 h-64 overflow-hidden">
+                        <img src="files/2.jpg" alt="Our laughs" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polaroid 3 -->
+            <div class="flex justify-center bg-gradient-to-br from-purple-200/30 to-pink-200/30">
+                <div class="polaroid" data-caption="Every moment 💫">
+                    <div class="w-64 h-64 overflow-hidden">
+                        <img src="files/3.jpg" alt="Every moment" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <p class="text-rose-700 mb-6 text-lg italic">
+                And I want to create a million more with you...
+            </p>
+            <button id="continueBtn1-5"
+                class="bg-pink-400 hover:bg-pink-500 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+                Show Me More 💖
+            </button>
+        </div>
+    </div>
+</section>
+
+    <!-- Section 3: The Promise -->
+    <section id="section3"
+        class="section-fade min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-pink-50 to-rose-100"
+        style="display: none;">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="love-letter">
+                <h2 class="text-3xl md:text-4xl font-bold text-rose-900 mb-8 text-center">
+                    My Promise to You
+                </h2>
+                <p class="text-lg md:text-xl text-rose-800 leading-relaxed text-center mb-6">
+                    In every moment, I promise to be your peace, your support, and your biggest fan.
+                </p>
+                <p class="text-lg md:text-xl text-rose-800 leading-relaxed text-center mb-8">
+                    My care for you grows with every sunrise, and my commitment to your happiness is unwavering.
+                </p>
+                <div class="text-center mb-8 text-6xl animate-pulse">
+                    💕
+                </div>
+
+                <div class="text-center">
+                    <button id="continueBtn2"
+                        class="bg-pink-400 hover:bg-pink-500 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+                        Continue 💖
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: The Big Question -->
+    <section id="section4" class="section-fade min-h-screen flex items-center justify-center px-4 py-20"
+        style="display: none;">
+        <div class="max-w-2xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold text-rose-900 mb-12 leading-tight">
+                Will You Be My Valentine,<br>
+                <span class="text-pink-500">Beautiful?</span>
+            </h2>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+                <button id="yesButton"
+                    class="bg-pink-400 hover:bg-pink-500 text-white font-bold text-2xl px-16 py-6 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse">
+                    Yes! 💖
+                </button>
+
+                <button id="noButton"
+                    class="runaway-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold text-lg px-8 py-4 rounded-full shadow-lg">
+                    No
+                </button>
+            </div>
+
+            <p class="text-rose-600 mt-8 text-sm italic">
+                Choose wisely... 😉
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 5: The Celebration -->
+    <section id="celebration"
+        class="celebration min-h-screen items-center justify-center px-4 py-20 bg-gradient-to-br from-pink-100 to-rose-200">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <div class="text-8xl mb-8 animate-bounce">
+                🎉💕🎊
+            </div>
+            <h2 class="text-5xl md:text-7xl font-bold text-rose-900 mb-8">
+                You've Made Me
+            </h2>
+            <p class="text-3xl md:text-5xl text-pink-500 font-bold mb-12 heartbeat">
+                The Happiest Person Alive!
+            </p>
+            <p class="text-2xl md:text-3xl text-rose-800 mb-8">
+                I love you ❤️
+            </p>
+            <div class="text-6xl mb-8 heartbeat">
+                💑
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-2xl mx-auto max-w-xl mb-8">
+                <p class="text-rose-700 text-lg leading-relaxed">
+                    Thank you for giving me this chance. I promise to cherish every Valentine's Day with you, starting
+                    right now. You're not just my Valentine — you're my everything. 💝
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="celebrateMore"
+                    class="bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse">
+                    Celebrate More! 🎊
+                </button>
+                <button id="valentineWeekBtn"
+                    class="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+                    Our Special Week 🌹
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Valentine's Week -->
+    <section id="valentineWeek" class="section-fade min-h-screen px-4 py-20 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50" style="display: none;">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold text-rose-900 mb-6">
+                    A Week of Love
+                </h2>
+                <p class="text-xl md:text-2xl text-rose-700 italic">
+                    Seven days to celebrate us, starting with today 🌹
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Rose Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-rose-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">🌹</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Rose Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 7</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        Like a rose, you bring beauty and fragrance to my life. Every thorn you've faced has only made you stronger and more precious to me. Here's my heart, wrapped in petals of love. 🌹
+                    </p>
+                </div>
+
+                <!-- Propose Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-pink-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">💍</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Propose Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 8</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        I propose we make every day an adventure together. Will you continue being my reason to smile, my inspiration, and my forever person? You already know my answer is always yes to you. 💕
+                    </p>
+                </div>
+
+                <!-- Chocolate Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-amber-600 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">🍫</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Chocolate Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 9</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        Life with you is sweeter than any chocolate. You're the sweetness in my mornings, the warmth in my evenings, and the joy that melts my heart every single day. 🍫
+                    </p>
+                </div>
+
+                <!-- Teddy Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-red-400 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">🧸</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Teddy Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 10</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        Just like a teddy bear brings comfort, you bring peace to my chaos. I want to be your safe place, your warm hug on cold days, and your constant companion through everything. 🧸
+                    </p>
+                </div>
+
+                <!-- Promise Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-purple-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">🤝</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Promise Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 11</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        I promise to love you on your best days and support you through your worst. I promise to choose you, every single day, in a million little ways. You have my word, my heart, my everything. 💫
+                    </p>
+                </div>
+
+                <!-- Hug Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-yellow-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">🤗</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Hug Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 12</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        In your arms, I've found my home. Every hug from you feels like the world pausing just for us. I'm sending you a million virtual hugs until I can hold you close again. 🤗
+                    </p>
+                </div>
+
+                <!-- Kiss Day -->
+                <div class="week-card bg-white p-8 rounded-2xl shadow-xl border-t-4 border-red-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">💋</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Kiss Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 13</p>
+                    <p class="text-rose-700 leading-relaxed text-center">
+                        Every kiss tells a story our words can't express. It's a promise, a celebration, and a reminder that you're my person. Saving all my sweetest kisses just for you. 💋
+                    </p>
+                </div>
+
+                <!-- Valentine's Day -->
+                <div class="week-card bg-gradient-to-br from-pink-100 to-rose-100 p-8 rounded-2xl shadow-2xl border-4 border-rose-500 transform hover:scale-105 transition-all">
+                    <div class="text-6xl mb-4 text-center">❤️</div>
+                    <h3 class="text-2xl font-bold text-rose-900 mb-3 text-center">Valentine's Day</h3>
+                    <p class="text-sm text-gray-600 mb-4 text-center">Feb 14</p>
+                    <p class="text-rose-700 leading-relaxed text-center font-semibold">
+                        The grand finale! Today we celebrate US – the laughter, the dreams, the quiet moments, and the big adventures. You're my Valentine today and every day. I love you endlessly. ❤️
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto text-center">
+                <div class="text-7xl mb-6">💝</div>
+                <h3 class="text-3xl font-bold text-rose-900 mb-4">A Week Made for Us</h3>
+                <p class="text-lg text-rose-700 leading-relaxed mb-6">
+                    Every single one of these days is special because I get to celebrate them with you. From roses to promises, from chocolates to hugs—each day is another chance to show you how much you mean to me.
+                </p>
+                <p class="text-xl text-pink-600 font-bold italic">
+                    Here's to our week of love, and to a lifetime of celebrating each other! 💕
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
